@@ -1,16 +1,74 @@
-# youapp
+````md
+# YouApp
 
-This apllication to complite technical test on you app
+![Flutter CI](https://github.com/your-username/youapp/actions/workflows/flutter.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/your-username/youapp/badge.svg?branch=main)](https://coveralls.io/github/your-username/youapp?branch=main)
 
-## Getting Started
+A Flutter application built as part of a technical test.
 
-This project is a starting point for a Flutter application.
+## ✨ Features
 
-A few resources to get you started if this is your first Flutter project:
+- User registration and login  
+- Form validation  
+- State management using Riverpod  
+- Modular architecture  
+- API integration  
+- Custom UI components
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🚀 Getting Started
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+To run this project locally:
+
+1. **Clone the repo:**
+   ```bash
+   git clone https://github.com/DavinMetoti/youapp_test.git
+   cd youapp
+````
+
+2. **Install dependencies:**
+
+   ```bash
+   flutter pub get
+   ```
+
+3. **Run the app:**
+
+   ```bash
+   flutter run
+   ```
+
+> ⚠️ Make sure your device or emulator is set up before running.
+
+---
+
+## 🧪 Testing
+
+To run tests:
+
+```bash
+flutter test
+```
+
+To generate a coverage report:
+
+```bash
+flutter test --coverage
+```
+
+> Coverage output: `coverage/lcov.info`
+
+---
+
+## 📚 Resources
+
+* [Flutter Documentation](https://docs.flutter.dev/)
+* [Flutter Codelabs](https://docs.flutter.dev/get-started/codelab)
+* [Flutter Cookbook](https://docs.flutter.dev/cookbook)
+
+---
+
+## 📜 License
+
+This project is for technical evaluation purposes only.
+
+```
