@@ -1,0 +1,53 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:youapp/core/network/api_client.dart';
+import 'package:youapp/core/network/api_routes.dart';
+import 'package:youapp/features/auth/data/models/user_model.dart';
+import 'login_state.dart';
+
+class LoginNotifier extends StateNotifier<LoginState> {
+  LoginNotifier() : super(LoginState.initial());
+
+  Future<bool> login({
+    required String userOrEmail,
+    required String password,
+  }) async {
+    state = state.copyWith(isLoading: true, errorMessage: null);
+
+    try {
+      final api = ApiClient();
+      // Deteksi apakah input adalah email atau username
+      final isEmail = userOrEmail.contains('@');
+      final payload = {
+        'username': isEmail ? "" : userOrEmail,
+        'email': isEmail ? userOrEmail : "",
+        'password': password.isNotEmpty ? password : "",
+      };
+      final response = await api.post(ApiRoutes.login, payload);
+
+      print('Login API response: $response');
+
+      if (response['access_token'] != null) {
+        final user = UserModel.fromJson(response);
+        print('Login success: $user');
+        state = state.copyWith(isLoading: false, errorMessage: null);
+        return true;
+      } else {
+        state = state.copyWith(
+          isLoading: false,
+          errorMessage: response['message'] ?? 'Login failed',
+        );
+        return false;
+      }
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: 'Login error: ${e.toString()}',
+      );
+      return false;
+    }
+  }
+}
+
+final loginProvider = StateNotifierProvider<LoginNotifier, LoginState>((ref) {
+  return LoginNotifier();
+});
