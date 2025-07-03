@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:youapp/core/network/api_client.dart';
 import 'package:youapp/core/network/api_routes.dart';
-import 'package:youapp/features/auth/data/models/user_model.dart';
+import 'package:youapp/common/services/secure_storage_service.dart';
 import 'login_state.dart';
 
 class LoginNotifier extends StateNotifier<LoginState> {
@@ -15,7 +15,6 @@ class LoginNotifier extends StateNotifier<LoginState> {
 
     try {
       final api = ApiClient();
-      // Deteksi apakah input adalah email atau username
       final isEmail = userOrEmail.contains('@');
       final payload = {
         'username': isEmail ? "" : userOrEmail,
@@ -25,7 +24,14 @@ class LoginNotifier extends StateNotifier<LoginState> {
       final response = await api.post(ApiRoutes.login, payload);
 
       if (response['access_token'] != null) {
-        final user = UserModel.fromJson(response);
+        final storage = SecureStorageService();
+        await storage.saveToken(response['access_token']);
+        if (isEmail) {
+          await storage.saveUserCredential(email: userOrEmail);
+        } else {
+          await storage.saveUserCredential(username: userOrEmail);
+        }
+
         state = state.copyWith(isLoading: false, errorMessage: null);
         return true;
       } else {

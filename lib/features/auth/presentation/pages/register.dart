@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:youapp/core/constants/image_path.dart';
 import 'package:youapp/features/auth/presentation/widgets/register_form.dart';
 import 'package:get/get.dart';
-import 'package:youapp/features/auth/presentation/pages/login.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});

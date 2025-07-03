@@ -1,7 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageService {
-  static final _storage = FlutterSecureStorage();
+  final FlutterSecureStorage _storage = FlutterSecureStorage();
 
   static const _keyToken = 'access_token';
 
@@ -19,5 +19,14 @@ class SecureStorageService {
 
   Future<void> clearAll() async {
     await _storage.deleteAll();
+  }
+
+  Future<void> saveUserCredential({String? username, String? email}) async {
+    if (username != null) {
+      await _storage.write(key: 'username', value: username);
+    }
+    if (email != null) {
+      await _storage.write(key: 'email', value: email);
+    }
   }
 }

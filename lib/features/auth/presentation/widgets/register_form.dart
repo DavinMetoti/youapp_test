@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
 import 'package:youapp/core/constants/colors.dart';
 import 'package:youapp/common/widgets/text_field.dart';
 import 'package:youapp/common/widgets/password_field.dart';
 import 'package:youapp/features/auth/presentation/providers/register_provider.dart';
 import 'package:youapp/common/utils/toast_helper.dart';
 import 'package:youapp/common/widgets/gradient_button.dart';
-import 'package:youapp/features/auth/presentation/pages/login.dart';
 
 abstract class IToastHelper {
   void showError(BuildContext context, String message);
@@ -92,17 +90,18 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
       return;
     }
 
+    final currentContext = context; // Simpan context sebelum async gap
     await notifier.register(username: username, email: email, password: password);
     final state = ref.read(registerProvider);
 
     if (state.success) {
-      _toast.showSuccess(context, 'Registration successful');
-      // Hapus navigasi ke login setelah register sukses
+      _toast.showSuccess(currentContext, 'Registration successful');
+      // Navigasi ke halaman login setelah register sukses (jika diaktifkan kembali)
       // Future.delayed(const Duration(milliseconds: 500), () {
       //   Get.offAllNamed('/login');
       // });
     } else if (state.errorMessage != null) {
-      _toast.showError(context, state.errorMessage!);
+      _toast.showError(currentContext, state.errorMessage!);
     }
   }
 

@@ -69,16 +69,17 @@ class _LoginFormState extends ConsumerState<LoginForm> {
       return;
     }
 
+    final currentContext = context; // Simpan context sebelum async gap
     final success = await notifier.login(
       userOrEmail: userOrEmail,
       password: password,
     );
 
     if (success) {
-      _toast.showSuccess(context, 'Login success');
+      _toast.showSuccess(currentContext, 'Login success');
     } else {
       final errorMsg = ref.read(loginProvider).errorMessage ?? 'Login failed';
-      _toast.showError(context, errorMsg);
+      _toast.showError(currentContext, errorMsg);
     }
   }
 
