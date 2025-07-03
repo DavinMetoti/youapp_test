@@ -33,7 +33,7 @@ class RegisterPage extends StatelessWidget {
                   const Text("Already have an account? ", style: TextStyle(color: Colors.white70)),
                   GestureDetector(
                     onTap: () {
-                      Get.to(() => const LoginPage(), transition: Transition.cupertino);
+                      Get.toNamed('/login');
                     },
                     child: const Text(
                       "Login here",
