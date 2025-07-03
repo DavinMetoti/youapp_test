@@ -46,7 +46,6 @@ class _LoginFormState extends ConsumerState<LoginForm> {
   }
 
   void _onInputChanged() {
-    // Hanya panggil setState jika widget masih terpasang
     if (mounted) setState(() {});
   }
 
@@ -69,11 +68,13 @@ class _LoginFormState extends ConsumerState<LoginForm> {
       return;
     }
 
-    final currentContext = context; // Simpan context sebelum async gap
+    final currentContext = context;
     final success = await notifier.login(
       userOrEmail: userOrEmail,
       password: password,
     );
+
+    if (!mounted) return;
 
     if (success) {
       _toast.showSuccess(currentContext, 'Login success');
@@ -87,7 +88,6 @@ class _LoginFormState extends ConsumerState<LoginForm> {
   Widget build(BuildContext context) {
     final state = ref.watch(loginProvider);
 
-    // Ambil nilai langsung dari controller agar selalu up-to-date
     final userOrEmail = controller.username.text.trim();
     final password = controller.password.text;
     final isInputFilled = userOrEmail.isNotEmpty && password.isNotEmpty;

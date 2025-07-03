@@ -90,16 +90,15 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
       return;
     }
 
-    final currentContext = context; // Simpan context sebelum async gap
+    final currentContext = context;
     await notifier.register(username: username, email: email, password: password);
+
+    if (!mounted) return;
+
     final state = ref.read(registerProvider);
 
     if (state.success) {
       _toast.showSuccess(currentContext, 'Registration successful');
-      // Navigasi ke halaman login setelah register sukses (jika diaktifkan kembali)
-      // Future.delayed(const Duration(milliseconds: 500), () {
-      //   Get.offAllNamed('/login');
-      // });
     } else if (state.errorMessage != null) {
       _toast.showError(currentContext, state.errorMessage!);
     }
