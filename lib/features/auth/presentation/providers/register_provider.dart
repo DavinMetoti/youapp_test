@@ -51,25 +51,20 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
         },
       );
 
-      print('Register API response: $response');
-
       final message = (response['message'] ?? '').toString().toLowerCase();
       final isSuccess = response['success'] == true ||
           response['token'] != null ||
           message.contains('created successfully');
 
       if (isSuccess) {
-        print('Register success');
         state = state.copyWith(isLoading: false, success: true);
       } else {
-        print('Register error: ${response['message'] ?? 'Registration failed'}');
         state = state.copyWith(
           isLoading: false,
           errorMessage: response['message'] ?? 'Registration failed',
         );
       }
     } catch (e) {
-      print('Register exception: $e');
       state = state.copyWith(
         isLoading: false,
         errorMessage: 'An error occurred: ${e.toString()}',

@@ -24,11 +24,8 @@ class LoginNotifier extends StateNotifier<LoginState> {
       };
       final response = await api.post(ApiRoutes.login, payload);
 
-      print('Login API response: $response');
-
       if (response['access_token'] != null) {
         final user = UserModel.fromJson(response);
-        print('Login success: $user');
         state = state.copyWith(isLoading: false, errorMessage: null);
         return true;
       } else {
