@@ -1,6 +1,6 @@
 # YouApp
 
-[![Flutter CI](https://github.com/DavinMetoti/youapp_test/actions/workflows/flutter.yml/badge.svg)](https://github.com/DavinMetoti/youapp_test/actions/workflows/flutter.yml)
+[![Flutter CI](https://github.com/DavinMetoti/youapp_test/actions/workflows/flutter_test.yml/badge.svg)](https://github.com/DavinMetoti/youapp_test/actions/workflows/flutter_test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/DavinMetoti/youapp_test/badge.svg?branch=main)](https://coveralls.io/github/DavinMetoti/youapp_test?branch=main)
 
 A Flutter application built as part of a technical test.
