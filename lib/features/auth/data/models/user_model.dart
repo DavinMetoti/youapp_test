@@ -1,12 +1,10 @@
-class UserModel {
-  final String username;
-  final String email;
-  final String password;
+import 'package:youapp/features/auth/domain/entities/user.dart';
 
+class UserModel extends User {
   UserModel({
-    required this.username,
-    required this.email,
-    required this.password,
+    required super.username,
+    required super.email,
+    required super.password,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {

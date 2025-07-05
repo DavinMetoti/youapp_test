@@ -17,7 +17,6 @@ class FakeRegisterNotifier extends RegisterNotifier {
     required String email,
     required String password,
   }) async {
-    // Simulasikan sukses
     state = state.copyWith(isLoading: false, success: true, errorMessage: null);
   }
 
@@ -128,10 +127,8 @@ void main() {
 
     final registerButton = find.widgetWithText(GradientButton, 'Register');
     await tester.tap(registerButton);
-    await tester.pump(const Duration(milliseconds: 700)); // tunggu navigasi
+    await tester.pump(const Duration(milliseconds: 700));
 
-    // Tidak perlu cek navigasi ke LoginPage karena sudah dihilangkan di logic aslinya
-    // Cek saja toast sukses muncul (mock/noop, jadi tidak error)
     expect(find.byType(RegisterForm), findsOneWidget);
   });
 }

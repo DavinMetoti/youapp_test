@@ -51,7 +51,6 @@ void main() {
     expect(find.text('testuser@mail.com'), findsOneWidget);
     expect(find.text('123456'), findsOneWidget);
 
-    // Setelah input terisi, tombol harus enabled
     await tester.pump();
     final loginButton = find.widgetWithText(GradientButton, 'Login');
     final GradientButton buttonWidget = tester.widget(loginButton);

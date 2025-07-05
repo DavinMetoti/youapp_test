@@ -29,7 +29,5 @@ void main() {
       expect(state.isLoading, false);
       expect(state.errorMessage, isNotNull);
     });
-
-    // Tambahkan mock api kalau ingin test berhasil login
   });
 }

@@ -7,6 +7,8 @@ import 'package:youapp/common/widgets/password_field.dart';
 import 'package:youapp/common/widgets/text_field.dart';
 import 'package:youapp/common/widgets/gradient_button.dart';
 import 'package:youapp/common/utils/toast_helper.dart';
+import 'package:get/get.dart';
+import 'package:youapp/features/profile/presentation/pages/profile.dart';
 
 abstract class IToastHelper {
   void showError(BuildContext context, String message);
@@ -78,6 +80,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
 
     if (success) {
       _toast.showSuccess(currentContext, 'Login success');
+      Get.offAll(() => const ProfilePage());
     } else {
       final errorMsg = ref.read(loginProvider).errorMessage ?? 'Login failed';
       _toast.showError(currentContext, errorMsg);
